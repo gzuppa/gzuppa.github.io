@@ -1,0 +1,142 @@
+.primerjuego {
+    height: 700px;
+    width: 400px;
+    position: absolute;
+    margin-left: 50px;
+}
+
+.segundojuego {
+    height: 700px;
+    width: 400px;
+    position: absolute;
+    margin-left: 505px;
+}
+
+.tercerjuego {
+    height: 700px;
+    width: 400px;
+    position: absolute;
+    margin-left: 960px;
+}
+
+.primerboton {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: black;
+    border-radius: 6px;
+    border: 2px solid #0016b0;
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    margin-left: 44px;
+    margin-top: 505px;
+}
+
+.segundoboton {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: black;
+    border-radius: 6px;
+    border: 2px solid #0016b0;
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    margin-left: 44px;
+    margin-top: 505px;
+}
+
+.tercerboton {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffffff;
+    background-color: black;
+    border-radius: 6px;
+    border: 2px solid #0016b0;
+    width: 300px;
+    height: 100px;
+    position: absolute;
+    margin-left: 44px;
+    margin-top: 505px;
+}
+
+.start {
+    position: absolute;
+    margin-top: 11px;
+}
+
+.epn{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    margin-top: 7px;
+    margin-left: 135px;
+}
+
+.trump{
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    margin-top: 193px;
+    margin-left: 215px;
+}
+
+.chavez{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    margin-top: 217px;
+    margin-left: 25px;
+}
+
+.tomate{
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    margin-top: 138px;
+    margin-left: 163px;
+}
+
+.beat{
+    position: absolute;
+    width: 310px;
+    height: 150px;
+    margin-top: 345px;
+    margin-left: 42px;
+}
+
+.dinotitulo{
+    position: absolute;
+    width: 310px;
+    height: 150px;
+    margin-top: 345px;
+    margin-left: 42px;
+}
+
+.wifi{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    margin-top: 7px;
+    margin-left: 135px;
+}
+
+.chrome{
+    position: absolute;
+    width: 170px;
+    height: 170px;
+    margin-top: 193px;
+    margin-left: 195px;
+}
+
+.dino{
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    margin-top: 206px;
+    margin-left: 40 px;
+}
