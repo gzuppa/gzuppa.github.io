@@ -6,8 +6,8 @@ var dx = 2;
 var dy = -2;
 var presionaDerecha = false;
 var presionaIzquierda = false;
-var donutFilas = 3;
-var donutColumnas = 16;
+var donutFilas = 2;
+var donutColumnas = 13;
 var donutEspacio = 10;
 var donutArriba = 30;
 var donutLados = 30;
@@ -15,6 +15,9 @@ var puntos = 0;
 var vidas = 3;
 var cancion = new Audio();
 cancion.src = "./the-simpsons-theme-midi-verision.mp3";
+var paddleHeight = 10;
+var paddleWidth = 75;
+var paddleX = (canvas.width-paddleWidth)/2;
 
 var donas = [];
 for(c=0; c<donutColumnas; c++){
@@ -24,6 +27,21 @@ for(c=0; c<donutColumnas; c++){
     }
 }
 
+
+
+function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = "#0095DD";
+    ctx.fill();
+    ctx.closePath();
+    if(presionaDerecha && paddleX < canvas.width-paddleWidth) {
+        paddleX += 2.5;
+    }
+    else if(presionaIzquierda && paddleX > 0) {
+        paddleX -= 2.5;
+    }
+}
 
 document.addEventListener("keydown", teclaPresionada, false);
 document.addEventListener("keyup", teclaSuelta, false);
@@ -141,7 +159,8 @@ class Donitas{
 var donasrosas = new Donitas();
 
 
-class Couch{    
+
+/*class Couch{    
     constructor(){
         this.x = 0;
         this.y = 535;
@@ -161,8 +180,8 @@ class Couch{
         }
     }
 }
-
-var sillon = new Couch();
+*/
+//var sillon = new Couch();
 
 class Homer {
     constructor(){
@@ -175,17 +194,8 @@ class Homer {
         dx = 2;
         dy = -1;
     }
-
-    collision(item){
-        return (this.x < item.x + item.width) &&
-            (this.x + this.width > item.x) &&
-            (this.y < item.y + item.height) &&
-            (this.y + this.height > item.y);
-    }
-
     draw(){
         ctx.drawImage(this.image, this.x += dx, this.y += dy, 75, 75)
-        var s = sillon.height
         if(x + dx > canvas.width-this.width || x + dx < this.width){
             dx = -dx;
         }
@@ -193,11 +203,16 @@ class Homer {
             dy = -dy;
         }
         else if(y + dy > canvas.height-this.height){
-            if(y > s && y < s -60){
+            if(x > paddleX && x < paddleX + paddleWidth){
                 dy = -dy;
             }
             else {
-                //alert("GAME OVER")
+                swal({
+                    title: "Perdiste!",
+                    text: "Dejarás a Homero con hambre?",
+                    icon: "success",
+                    button: "Mas donas!",
+                  });
                 //document.location.reload();
                 clearInterval(interval)
             }
@@ -214,16 +229,24 @@ function updates(){
     ctx.clearRect(0,0,canvas.width, canvas.height)
     fondo.draw();
     donasrosas.draw();
+    drawPaddle();
     homerito.draw();
-    sillon.draw();
-    console.log(homerito.collision(sillon));
-    if(homerito.collision(sillon)){
-        console.log('perro')
-    }
+    colision();
     puntitos.draw();
     viditas.draw();
-    colision();
     cancion.play();
 }
 
+
+document.getElementById('button').onclick = (function() {
+    interval = setInterval(updates, 10);
+    document.getElementsByTagName('audio')[0].play();
+    document.getElementsByTagName('span')[0].innerHTML = 'Donas!';
+    return false;
+});
+
+/*
+button.onclick = function start(){
 interval = setInterval(updates, 10);
+}
+*/

@@ -1,12 +1,5 @@
 .background{
-    background: rgba(92,255,146,1);
-    background: -moz-linear-gradient(left, rgba(92,255,146,1) 0%, rgba(92,255,146,0.9) 31%, rgba(68,238,167,0.9) 91%);
-    background: -webkit-gradient(left top, right top, color-stop(0%, rgba(92,255,146,1)), color-stop(31%, rgba(92,255,146,0.9)), color-stop(91%, rgba(68,238,167,0.9)));
-    background: -webkit-linear-gradient(left, rgba(92,255,146,1) 0%, rgba(92,255,146,0.9) 31%, rgba(68,238,167,0.9) 91%);
-    background: -o-linear-gradient(left, rgba(92,255,146,1) 0%, rgba(92,255,146,0.9) 31%, rgba(68,238,167,0.9) 91%);
-    background: -ms-linear-gradient(left, rgba(92,255,146,1) 0%, rgba(92,255,146,0.9) 31%, rgba(68,238,167,0.9) 91%);
-    background: linear-gradient(to right, rgba(92,255,146,1) 0%, rgba(92,255,146,0.9) 31%, rgba(68,238,167,0.9) 91%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#5cff92', endColorstr='#44eea7', GradientType=1 );
+    background: url("./darkback.jpg")
 }
 
 * {
@@ -139,3 +132,63 @@
 	.green span {
 		background: rgba(0,63,71,.7);		
 	}
+
+    .swal-overlay {
+        background-color: rgba(43, 165, 137, 0.45);
+      }
+
+      .titulo{
+          position: absolute;
+          width: 458px;
+          height: 149px;
+          margin-top: -20px;
+          margin-left: -700px;
+      }
+
+      .ayuda{
+        position: absolute;
+        width: 306px;
+        height: 149px;
+        margin-top: 131px;
+        margin-left: -706px;
+    }
+
+    .fila{
+        position: absolute;
+        width: 307px;
+        height: 124px;
+        margin-top: 241px;
+        margin-left: -706px;
+    }
+
+    .hongos{
+        position: absolute;
+        width: 311px;
+        height: 135px;
+        margin-top: 343px;
+        margin-left: -711px;
+    }
+
+    .cuidado{
+        position: absolute;
+        width: 318px;
+        height: 129px;
+        margin-top: 430px;
+        margin-left: -717px;
+    }
+
+    .tocas{
+        position: absolute;
+        width: 313px;
+        height: 117px;
+        margin-top: 534px;
+        margin-left: -714px;
+    }
+
+    .empezar{
+        position: absolute;
+        width: 320px;
+        height: 100px;
+        margin-top: 624px;
+        margin-left: -717px;
+    }

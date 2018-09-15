@@ -2,9 +2,8 @@
 var velocidad = 80;
 var dimension = 10;
 var cancion = new Audio();
-cancion.src = "./Super Mario Bros. 3 - Overworld 1 Acapella.mp3";
-var cancionGameOver = new Audio();
-cancionGameOver.src = "./gameover.mp3";
+cancion.src = "./castle-theme-super-mario-world.mp3"
+
 
 
 class general
@@ -78,22 +77,6 @@ class Comida extends general {
 	}
 }
 
-class GameOver extends general {
-	constructor(){
-		super();
-		this.x = 0;
-		this.y = 0;
-		this.width = 0;
-		this.height = 0;
-		this.image = new Image();
-		this.image.src = "./gameoverback.gif"
-	}
-	dibujar(ctx){
-		ctx.drawImage(this.image, 100,100,100,100)
-	}
-}
-
-var perdiste = new GameOver();
 
 var cabeza = new Snake(10,10);
 var comida = new Comida();
@@ -138,6 +121,7 @@ function control(event){
 	}
 }
 
+
 function gameOver(){
 	xdir = 0;
 	ydir = 0;
@@ -145,10 +129,13 @@ function gameOver(){
 	ejey = true;
 	cabeza = new Snake(10,10);
 	comida = new Comida();
-	cancion.pause();
-	perdiste.dibujar();
-	cancion.pause();
-	cancionGameOver.play();
+	swal({
+		title: "Buen trabajo!!",
+		text: "Puedes hacerlo mejor!",
+		icon: "success",
+		button: "OTRO OTRO!",
+	  });
+	  clearInterval(start);
 }
 function choquepared(){
 	if(cabeza.x < 0 || cabeza.x > 740 || cabeza.y < 0 || cabeza.y > 540){
@@ -164,7 +151,6 @@ function choquecuerpo(){
 	}
 	while(temp != null){
 		if(cabeza.choque(temp)){
-			//fin de juego
 			gameOver();
 		} else {
 			temp = temp.verSiguiente();
@@ -177,15 +163,15 @@ function dibujar(){
 	var ctx = canvas.getContext("2d");
 	ctx.clearRect(0,0, canvas.width, canvas.height);
 	cabeza.dibujar(ctx);
-    comida.dibujar(ctx);
-    //fondo.draw(ctx);
+	comida.dibujar(ctx);
 }
+
 function main(){
+	cancion.play();
 	choquecuerpo();
 	choquepared();
 	dibujar();
 	movimiento();
-	cancion.play();
 	if(cabeza.choque(comida)){
 		comida.colocar();
 		cabeza.meter();
@@ -195,4 +181,5 @@ button.onclick = function start(){
 setInterval("main()", velocidad);
 }
 
-start();
+
+//start();
