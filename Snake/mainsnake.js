@@ -1,18 +1,21 @@
 //Variables globales
 var velocidad = 80;
-var tamano = 10;
+var dimension = 10;
 var cancion = new Audio();
 cancion.src = "./Super Mario Bros. 3 - Overworld 1 Acapella.mp3";
+var cancionGameOver = new Audio();
+cancionGameOver.src = "./gameover.mp3";
 
 
-class objeto {
+class general
+ {
 	constructor(){
-		this.tamano = tamano;
+		this.dimension = dimension;
 	}
 	choque(obj){
-		var difx = Math.abs(this.x - obj.x);
-		var dify = Math.abs(this.y - obj.y);
-		if(difx >= 0 && difx < tamano && dify >= 0 && dify < tamano){
+		var diferenciax = Math.abs(this.x - obj.x);
+		var diferenciay = Math.abs(this.y - obj.y);
+		if(diferenciax >= 0 && diferenciax < dimension && diferenciay >= 0 && diferenciay < dimension){
 			return true;
 		} else {
 			return false;   
@@ -20,7 +23,7 @@ class objeto {
 	}
 }
 
-class Cola extends objeto {
+class Snake extends general {
 	constructor(x,y){
 		super();
 		this.x = x;
@@ -28,15 +31,11 @@ class Cola extends objeto {
         this.siguiente = null;
         this.image = new Image();
 		this.image.src = "./boo.png"
-		//this.image2 = new Image();
-		//this.image.src = "./yoshisegg.png"
 	}
 	dibujar(ctx){
 		if(this.siguiente != null){
 			this.siguiente.dibujar(ctx);
 		}
-		//ctx.fillStyle = "#0000FF";
-		//ctx.fillRect(this.x, this.y, this.tamano, this.tamano);
         ctx.drawImage(this.image, this.x, this.y, 70,70)
     }
 	setxy(x,y){
@@ -48,7 +47,7 @@ class Cola extends objeto {
 	}
 	meter(){
 		if(this.siguiente == null){
-			this.siguiente = new Cola(this.x, this.y);
+			this.siguiente = new Snake(this.x, this.y);
 		} else {
 			this.siguiente.meter();
 		}
@@ -58,7 +57,7 @@ class Cola extends objeto {
 	}
 }
 
-class Comida extends objeto {
+class Comida extends general {
 	constructor(){
 		super();
 		this.x = this.generar();
@@ -75,30 +74,29 @@ class Comida extends objeto {
 		this.y = this.generar();
 	}
 	dibujar(ctx){
-		//ctx.fillStyle = "#FF0000";
-        //ctx.fillRect(this.x, this.y, this.tamano, this.tamano);
         ctx.drawImage(this.image,this.x,this.y, 60, 60)
 	}
 }
 
-/*class Background{
-    constructor(){
-        this.x = 0;
-        this.y =0;
-        this.width = canvas.width;
-        this.height = canvas.height;
-        this.image = new Image();
-        this.image.src = "./background.jpg"
-    }
-    draw(ctx){
-    ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
-    }
-}*/
+class GameOver extends general {
+	constructor(){
+		super();
+		this.x = 0;
+		this.y = 0;
+		this.width = 0;
+		this.height = 0;
+		this.image = new Image();
+		this.image.src = "./gameoverback.gif"
+	}
+	dibujar(ctx){
+		ctx.drawImage(this.image, 100,100,100,100)
+	}
+}
 
-//Objetos del juego
-var cabeza = new Cola(10,10);
+var perdiste = new GameOver();
+
+var cabeza = new Snake(10,10);
 var comida = new Comida();
-//var fondo = new Background();
 var ejex = true;
 var ejey = true;
 var xdir = 0;
@@ -112,13 +110,13 @@ function control(event){
 	var cod = event.keyCode;
 	if(ejex){
 		if(cod == 38){
-			ydir = -tamano;
+			ydir = -dimension;
 			xdir = 0;
 			ejex = false;
 			ejey = true;
 		}
 		if(cod == 40){
-			ydir = tamano;
+			ydir = dimension;
 			xdir = 0;
 			ejex = false;
 			ejey = true;
@@ -127,31 +125,34 @@ function control(event){
 	if(ejey){
 		if(cod == 37){
 			ydir = 0;
-			xdir = -tamano;
+			xdir = -dimension;
 			ejey = false;
 			ejex = true;
 		}
 		if(cod == 39){
 			ydir = 0;
-			xdir = tamano;
+			xdir = dimension;
 			ejey = false;
 			ejex = true;
 		}
 	}
 }
 
-function findeJuego(){
+function gameOver(){
 	xdir = 0;
 	ydir = 0;
 	ejex = true;
 	ejey = true;
-	cabeza = new Cola(10,10);
+	cabeza = new Snake(10,10);
 	comida = new Comida();
-	alert("Perdiste");
+	cancion.pause();
+	perdiste.dibujar();
+	cancion.pause();
+	cancionGameOver.play();
 }
 function choquepared(){
 	if(cabeza.x < 0 || cabeza.x > 740 || cabeza.y < 0 || cabeza.y > 540){
-		findeJuego();
+		gameOver();
 	}
 }
 function choquecuerpo(){
@@ -164,7 +165,7 @@ function choquecuerpo(){
 	while(temp != null){
 		if(cabeza.choque(temp)){
 			//fin de juego
-			findeJuego();
+			gameOver();
 		} else {
 			temp = temp.verSiguiente();
 		}
@@ -175,7 +176,6 @@ function dibujar(){
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext("2d");
 	ctx.clearRect(0,0, canvas.width, canvas.height);
-	//aquí abajo va todo el dibujo
 	cabeza.dibujar(ctx);
     comida.dibujar(ctx);
     //fondo.draw(ctx);
