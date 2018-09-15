@@ -73,7 +73,7 @@ function colision(){
             dy = -dy
             d.donagolpeada = 0;
             puntos++;
-            if(score == donutColumnas*donutFilas){
+            if(puntos == donutColumnas*donutFilas){
                 alert("WIN");
                 document.location.reload();
             }
@@ -202,7 +202,7 @@ class Homer {
         if(y + dy < this.width) {
             dy = -dy;
         }
-        else if(y + dy > canvas.height-this.height){
+        else if(y + dy > canvas.height-33){
             if(x > paddleX && x < paddleX + paddleWidth){
                 dy = -dy;
             }
@@ -210,7 +210,7 @@ class Homer {
                 swal({
                     title: "Perdiste!",
                     text: "Dejarás a Homero con hambre?",
-                    icon: "success",
+                    icon: "success",    
                     button: "Mas donas!",
                   });
                 //document.location.reload();
