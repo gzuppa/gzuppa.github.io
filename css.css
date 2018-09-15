@@ -239,3 +239,9 @@ body {
     background-color: rgba(233, 248, 23, 0.979);
     border: 3px solid white;
   }
+
+  .by{
+    position: absolute;
+    margin-top: 690px;
+    margin-left: 270px;
+  }
