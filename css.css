@@ -3,7 +3,7 @@ body {
     background-size: 100%;
 }
 
-#pagegradient {
+.pagegradient {
   background-image:
         -webkit-gradient(
             radial, 
